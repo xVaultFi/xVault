@@ -7,9 +7,9 @@ export default function Swap() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#E9F3F2] bg-opacity-40">
-      <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-xl border border-gray-200">
+      <div className="w-full  max-w-md rounded-3xl bg-white p-6 shadow-xl border border-gray-200">
         {/* Header */}
-        <div className="mb-4">
+        <div className="mb-4 ">
           <p className="text-sm text-gray-600">Stake into</p>
           <div className="flex justify-between items-center mt-1">
             <span className="font-semibold text-gray-800 text-lg">
