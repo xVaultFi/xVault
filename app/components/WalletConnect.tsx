@@ -31,6 +31,8 @@ export default function WalletConnect() {
       >
         Disconnect
       </button>
+      
     </div>
+    
   );
 }

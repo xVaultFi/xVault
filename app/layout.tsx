@@ -3,12 +3,12 @@ import { Space_Grotesk } from 'next/font/google';
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Providers from "./providers/PrivyProvider";
-    // pages/_app.js or app/layout.tsx
-    const spaceGrotesk = Space_Grotesk({
-      subsets: ['latin'],
-      variable: '--font-space-grotesk', // Optional: for use with CSS variables
-      display: 'swap', // Optional: ensures text remains visible during font loading
-    });
+// pages/_app.js or app/layout.tsx
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk', // Optional: for use with CSS variables
+  display: 'swap', // Optional: ensures text remains visible during font loading
+});
 
 export const metadata: Metadata = {
   title: "xVaultFi - Secure your crypto",
@@ -25,9 +25,9 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${spaceGrotesk.variable} antialiased`}
       >
-     
-        <Providers> <Navbar/>{children}</Providers>
-     
+
+        <Providers> <Navbar />{children}</Providers>
+
       </body>
     </html>
   );
