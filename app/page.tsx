@@ -2,7 +2,7 @@
 export default function Home() {
   return (
     <div className="">
-      <p>hello world</p>
+      <p className="bg-[#B700FF]">hello world</p>
     </div>
   );
 }
