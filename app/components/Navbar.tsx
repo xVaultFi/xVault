@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, Settings } from "lucide-react";
+import WalletConnect from "./WalletConnect";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="w-full sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
+    <nav className="w-full sticky top-0 z-50 bg-black backdrop-blur-md border-b border-gray-800">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-3">
         {/* LEFT SIDE - Logo + NavLinks */}
         <div className="flex items-center gap-8">
@@ -51,9 +52,7 @@ export default function Navbar() {
           <button className="p-2 text-gray-300 hover:text-white transition-colors">
             <Settings size={20} />
           </button>
-          <button className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-4 py-2 rounded-xl font-medium hover:opacity-90 transition-all">
-            Connect Wallet
-          </button>
+          <WalletConnect/>
         </div>
 
         {/* Mobile Menu Button */}
@@ -83,9 +82,8 @@ export default function Navbar() {
             <button className="flex items-center w-full px-5 py-3 text-gray-300 hover:text-white hover:bg-gray-900 transition-colors">
               <Settings size={18} className="mr-2" /> Settings
             </button>
-            <button className="w-full text-center bg-gradient-to-r from-purple-600 to-blue-500 text-white px-5 py-3 rounded-none font-medium hover:opacity-90 transition-all">
-              Connect Wallet
-            </button>
+            
+           
           </div>
         </div>
       )}

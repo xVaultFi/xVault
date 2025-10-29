@@ -33,7 +33,8 @@ export default function RwaLenderCard() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-4">
+  <div className="bg-[#0b0d10]">
+      <div className="max-w-md mx-auto p-4">
       <div className="bg-[#dadada] dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-lg p-5">
         <div className="mt-4 grid grid-cols-1 gap-3">
           {/* Days select */}
@@ -158,5 +159,6 @@ export default function RwaLenderCard() {
         </div>
       </div>
     </div>
+  </div>
   );
 }
