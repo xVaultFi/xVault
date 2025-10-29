@@ -23,9 +23,9 @@ export default function RwaStakingCard() {
 
   // Hard-coded APRs for each duration
   const aprMap: Record<(typeof daysOptions)[number], number> = {
-    7: 0.05, // 5% for 7 days
-    15: 0.06, // 6% for 15 days
-    30: 0.08, // 8% for 30 days
+    7: 0.07, // 5% for 7 days
+    15: 0.08, // 6% for 15 days
+    30: 0.12, // 8% for 30 days
   };
 
   const [selectedToken, setSelectedToken] = useState(tokens[0].id);
