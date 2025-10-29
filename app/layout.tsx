@@ -1,17 +1,14 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata } from "next";    // pages/_app.js or app/layout.tsx
+import { Space_Grotesk } from 'next/font/google';
 import "./globals.css";
 import Navbar from "./components/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+    // pages/_app.js or app/layout.tsx
+    const spaceGrotesk = Space_Grotesk({
+      subsets: ['latin'],
+      variable: '--font-space-grotesk', // Optional: for use with CSS variables
+      display: 'swap', // Optional: ensures text remains visible during font loading
+    });
 
 export const metadata: Metadata = {
   title: "xVaultFi - Secure your crypto",
@@ -26,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${spaceGrotesk.variable} antialiased`}
       >
       <Navbar/>
         {children}

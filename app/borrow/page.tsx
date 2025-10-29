@@ -3,27 +3,60 @@ import React, { useState, useMemo } from "react";
 
 export default function RwaStakingCard() {
   const tokens = [
-    { id: "xNVDIA", label: "xNVDIA", multiplier: 0.8, description: "High-liquidity RWA stock token (NVIDIA)", image: "/nvidia.png" },
-    { id: "xTESLA", label: "xTESLA", multiplier: 0.7, description: "Emerging RWA stock token (TESLA)", image: "/tesla.png" },
-    { id: "xAPPLE", label: "xAPPLE", multiplier: 0.75, description: "Blue-chip RWA token (Apple Inc.)", image: "/apple.png" },
-    { id: "xGOOGLE", label: "xGOOGLE", multiplier: 0.78, description: "RWA token backed by Google equity", image: "/google.png" },
-    { id: "xMETA", label: "xMETA", multiplier: 0.73, description: "Social & tech sector RWA token (Meta)", image: "/meta.png" },
-    { id: "xAMAZON", label: "xAMAZON", multiplier: 0.76, description: "E-commerce RWA token (Amazon)", image: "/amazon.png" },
+    {
+      id: "xNVDIA",
+      label: "xNVDIA",
+      multiplier: 0.8,
+      description: "High-liquidity RWA stock token (NVIDIA)",
+      image: "/nvidia.png",
+    },
+    {
+      id: "xTESLA",
+      label: "xTESLA",
+      multiplier: 0.7,
+      description: "Emerging RWA stock token (TESLA)",
+      image: "/tesla.png",
+    },
   ];
 
-  const daysOptions = [7, 15, 30];
+  const daysOptions = [7, 15, 30] as const;
+
+  // Hard-coded APRs for each duration
+  const aprMap: Record<(typeof daysOptions)[number], number> = {
+    7: 0.05, // 5% for 7 days
+    15: 0.06, // 6% for 15 days
+    30: 0.08, // 8% for 30 days
+  };
+
   const [selectedToken, setSelectedToken] = useState(tokens[0].id);
-  const [selectedDays, setSelectedDays] = useState(daysOptions[0]);
-  const [amount, setAmount] = useState("1000");
+  const [selectedDays, setSelectedDays] = useState<(typeof daysOptions)[number]>(
+    daysOptions[1]
+  ); // default 15 days
+  const [amount, setAmount] = useState("360");
   const [isStaking, setIsStaking] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const tokenObj = useMemo(() => tokens.find((t) => t.id === selectedToken) ?? tokens[0], [selectedToken]);
+  const tokenObj = useMemo(
+    () => tokens.find((t) => t.id === selectedToken) ?? tokens[0],
+    [selectedToken]
+  );
 
-  const projectedReward = useMemo(() => {
+  // Current APR based on selected days
+  const currentApr = aprMap[selectedDays];
+
+  // Liquidity user receives (based on TVL %)
+  const liquidity = useMemo(() => {
     const amt = parseFloat(amount) || 0;
-    return amt * tokenObj.multiplier * (selectedDays / 365);
-  }, [amount, tokenObj, selectedDays]);
+    return amt * tokenObj.multiplier;
+  }, [amount, tokenObj]);
+
+  // Interest calculation (use direct APR for the period)
+  const interest = useMemo(() => {
+    return liquidity * currentApr;
+  }, [liquidity, currentApr]);
+
+  // Total repayment (liquidity + interest)
+  const totalRepay = useMemo(() => liquidity + interest, [liquidity, interest]);
 
   function handleStake() {
     setIsStaking(true);
@@ -33,21 +66,6 @@ export default function RwaStakingCard() {
   return (
     <div className="max-w-md mx-auto p-4">
       <div className="bg-[#dadada] dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-lg p-5">
-        <div className="flex items-start justify-between">
-          <div>
-            <h3 className="text-lg font-semibold">RWA Staking</h3>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              Stake your xStocks for short-term yield and protocol rewards.
-            </p>
-          </div>
-          <div className="text-right">
-            <div className="text-xs text-slate-400">TVL Multiplier</div>
-            <div className="mt-1 font-mono font-semibold text-sm">
-              {Math.round(tokenObj.multiplier * 100)}%
-            </div>
-          </div>
-        </div>
-
         <div className="mt-4 grid grid-cols-1 gap-3">
           {/* Dropdown select */}
           <label className="block relative">
@@ -59,7 +77,11 @@ export default function RwaStakingCard() {
               className="mt-2 w-full flex justify-between items-center rounded-xl border border-slate-200 dark:border-slate-800 px-4 py-3 bg-white dark:bg-slate-800"
             >
               <div className="flex items-center gap-2">
-                <img src={tokenObj.image} alt={tokenObj.label} className="w-6 h-6 rounded-full" />
+                <img
+                  src={tokenObj.image}
+                  alt={tokenObj.label}
+                  className="w-6 h-6 rounded-full"
+                />
                 <span className="font-semibold">{tokenObj.label}</span>
               </div>
               <svg
@@ -71,7 +93,12 @@ export default function RwaStakingCard() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
 
@@ -85,17 +112,27 @@ export default function RwaStakingCard() {
                       setIsDropdownOpen(false);
                     }}
                     className={`flex items-center justify-between px-4 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800 cursor-pointer ${
-                      selectedToken === t.id ? "bg-indigo-100 dark:bg-slate-800/60" : ""
+                      selectedToken === t.id
+                        ? "bg-indigo-100 dark:bg-slate-800/60"
+                        : ""
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <img src={t.image} alt={t.label} className="w-6 h-6 rounded-full" />
+                      <img
+                        src={t.image}
+                        alt={t.label}
+                        className="w-6 h-6 rounded-full"
+                      />
                       <div>
                         <div className="font-semibold">{t.label}</div>
-                        <div className="text-xs text-slate-400">{t.description}</div>
+                        <div className="text-xs text-slate-400">
+                          {t.description}
+                        </div>
                       </div>
                     </div>
-                    <div className="text-sm font-medium">{Math.round(t.multiplier * 100)}%</div>
+                    <div className="text-sm font-medium">
+                      {Math.round(t.multiplier * 100)}%
+                    </div>
                   </div>
                 ))}
               </div>
@@ -104,7 +141,9 @@ export default function RwaStakingCard() {
 
           {/* Days select */}
           <label className="block">
-            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Select Days</span>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
+              Select Days:
+            </span>
             <div className="mt-2 inline-flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
               {daysOptions.map((d) => (
                 <button
@@ -122,6 +161,14 @@ export default function RwaStakingCard() {
             </div>
           </label>
 
+          {/* Centered dynamic info */}
+          <div className="text-center mt-3">
+            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              {Math.round(tokenObj.multiplier * 100)}% TVL,{" "}
+              {(currentApr * 100).toFixed(1)}% Return for {selectedDays} Days
+            </p>
+          </div>
+
           {/* Amount input */}
           <label className="block">
             <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
@@ -133,31 +180,40 @@ export default function RwaStakingCard() {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               className="mt-2 w-full rounded-xl border border-slate-200 dark:border-slate-800 px-4 py-2 placeholder:text-slate-400"
-              placeholder="1000"
+              placeholder="360"
             />
           </label>
 
-          {/* Summary */}
-          <div className="mt-1 p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-xs text-slate-500">Selected</div>
-                <div className="font-semibold flex items-center gap-2">
-                  <img src={tokenObj.image} alt={tokenObj.label} className="w-5 h-5 rounded-full" />
-                  {tokenObj.label} · {selectedDays} days
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="text-xs text-slate-500">Projected reward</div>
-                <div className="font-mono font-semibold">
-                  {projectedReward ? projectedReward.toFixed(2) : "0.00"} USD
-                </div>
-              </div>
+          {/* Calculation Summary */}
+          <div className="mt-3 p-4 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <div className="flex justify-between text-sm">
+              <span className="font-medium text-slate-600 dark:text-slate-300">
+                Liquidity Received ({Math.round(tokenObj.multiplier * 100)}% TVL)
+              </span>
+              <span className="font-mono text-slate-800 dark:text-slate-100">
+                {liquidity.toFixed(2)} USDC
+              </span>
+            </div>
+            <div className="flex justify-between text-sm mt-2">
+              <span className="font-medium text-slate-600 dark:text-slate-300">
+                Interest ({(currentApr * 100).toFixed(1)}% for {selectedDays} days)
+              </span>
+              <span className="font-mono text-slate-800 dark:text-slate-100">
+                {interest.toFixed(2)} USDC
+              </span>
+            </div>
+            <div className="flex justify-between text-sm mt-2 border-t border-slate-200 dark:border-slate-700 pt-2">
+              <span className="font-semibold text-slate-700 dark:text-slate-200">
+                Total Repayment
+              </span>
+              <span className="font-mono font-semibold text-indigo-600">
+                {totalRepay.toFixed(2)} USDC
+              </span>
             </div>
           </div>
 
           {/* Stake button */}
-          <div className="mt-3 flex gap-2">
+          <div className="mt-4 flex gap-2">
             <button
               onClick={handleStake}
               disabled={isStaking}
@@ -167,8 +223,8 @@ export default function RwaStakingCard() {
             </button>
             <button
               onClick={() => {
-                setAmount("0");
-                setSelectedDays(daysOptions[0]);
+                setAmount("360");
+                setSelectedDays(daysOptions[1]);
                 setSelectedToken(tokens[0].id);
               }}
               className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800"
@@ -176,10 +232,6 @@ export default function RwaStakingCard() {
               Reset
             </button>
           </div>
-        </div>
-
-        <div className="mt-4 text-xs text-slate-400">
-            
         </div>
       </div>
     </div>
