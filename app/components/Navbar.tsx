@@ -7,10 +7,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Vaults", href: "/" },
-    { name: "Stake", href: "/" },
-    { name: "Docs", href: "/" },
+    { name: "borrow", href: "/borrow" },
+    { name: "lender", href: "/lender" },
+    { name: "dashboard", href: "/dashboard" },
+
   ];
 
   return (
