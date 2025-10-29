@@ -142,7 +142,7 @@ export default function RwaStakingCard() {
           {/* Days select */}
           <label className="block">
             <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
-              Select Days:
+              Lock Duration
             </span>
             <div className="mt-2 inline-flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
               {daysOptions.map((d) => (
@@ -155,12 +155,11 @@ export default function RwaStakingCard() {
                       : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300"
                   }`}
                 >
-                  {d}
+                  {d} Days
                 </button>
               ))}
             </div>
           </label>
-
           {/* Centered dynamic info */}
           <div className="text-center mt-3">
             <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -170,7 +169,7 @@ export default function RwaStakingCard() {
           </div>
 
           {/* Amount input */}
-          <label className="block">
+          <label className="block bg-white rounded-xl mt-2 p-2">
             <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
               Amount to stake (USD)
             </span>
