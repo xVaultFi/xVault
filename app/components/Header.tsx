@@ -5,7 +5,7 @@ import WalletConnect from "./WalletConnect"
 
 export default function Header() {
   return (
-    <header className="relative z-20 flex items-center justify-between p-6">
+    <header className="relative z-50 flex items-center justify-between p-6">
       {/* Logo */}
       <div className="flex items-center">
         <Link href="/" className="text-2xl font-bold text-white">
