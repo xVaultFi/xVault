@@ -8,14 +8,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "@paper-design/shaders-react": "^0.0.61",
     "@privy-io/react-auth": "^2.25.0",
     "@solana/web3.js": "^1.98.4",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.23.24",
     "html2canvas": "^1.4.1",
     "lucide-react": "^0.545.0",
     "next": "15.5.4",
+    "next-themes": "^0.4.6",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

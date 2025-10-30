@@ -1,18 +1,26 @@
-import type { Metadata } from "next";    // pages/_app.js or app/layout.tsx
+import type { Metadata } from "next";
 import { Space_Grotesk } from 'next/font/google';
+import { Instrument_Serif } from 'next/font/google';
 import "./globals.css";
-import Navbar from "./components/Navbar";
 import Providers from "./providers/PrivyProvider";
-// pages/_app.js or app/layout.tsx
+
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-space-grotesk', // Optional: for use with CSS variables
-  display: 'swap', // Optional: ensures text remains visible during font loading
+  variable: '--font-space-grotesk',
+  display: 'swap',
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "xVaultFi - Secure your crypto",
-  description: "Secure your crypto with xVaultFi",
+  title: "xVaultFi - Real-World Yield on Solana",
+  description: "Earn stable yield or borrow against tokenized real-world assets on Solana",
 };
 
 export default function RootLayout({
@@ -23,11 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${spaceGrotesk.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${instrumentSerif.variable} antialiased`}
       >
-
-        <Providers> <Navbar />{children}</Providers>
-
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
