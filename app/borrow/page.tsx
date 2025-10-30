@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react";
 import Header from "@/app/components/Header";
 import DarkBackground from "@/app/components/DarkBackground";
 import Image from "next/image";
+import Navbar from "../components/Navbar";
 
 export default function RwaStakingCard() {
   const tokens = [
@@ -51,7 +52,6 @@ export default function RwaStakingCard() {
   }, [amount, tokenObj]);
 
   const interest = useMemo(() => liquidity * currentApr, [liquidity, currentApr]);
-
   const totalRepay = useMemo(() => liquidity + interest, [liquidity, interest]);
 
   function handleStake() {
@@ -61,11 +61,12 @@ export default function RwaStakingCard() {
 
   return (
     <DarkBackground>
-      <Header />
+     <Navbar/>
       <div className="flex items-center justify-center h-screen">
         <div className="max-w-md w-full mx-auto p-4">
           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg p-5 max-h-[80vh] overflow-y-auto">
             <div className="mt-4 grid grid-cols-1 gap-3">
+              
               {/* Dropdown select */}
               <label className="block relative">
                 <span className="text-sm font-medium text-white">
@@ -106,18 +107,16 @@ export default function RwaStakingCard() {
                 </button>
 
                 {isDropdownOpen && (
-                  <div className="absolute z-20 mt-2 w-full bg-black border border-white/20 rounded-xl shadow-lg max-h-56 overflow-y-auto transition-all duration-200 ease-in-out">
+                  <div className="absolute z-20 mt-2 w-full bg-black border border-white/20 rounded-xl shadow-lg max-h-56 overflow-y-auto">
                     {tokens.map((t) => (
                       <div
                         key={t.id}
-                        onClick={() => {
+                        onMouseDown={() => {
                           setSelectedToken(t.id);
-                          setIsDropdownOpen(false); // closes immediately
+                          setIsDropdownOpen(false);
                         }}
-                        className={`flex items-center justify-between px-4 py-3 cursor-pointer text-white transition-all ${
-                          selectedToken === t.id
-                            ? "bg-black text-indigo-300"
-                            : "hover:bg-white/10"
+                        className={`flex items-center justify-between px-4 py-3 hover:bg-white/20 cursor-pointer text-white transition-all ${
+                          selectedToken === t.id ? "bg-black" : ""
                         }`}
                       >
                         <div className="flex items-center gap-3">
@@ -209,9 +208,7 @@ export default function RwaStakingCard() {
                   </span>
                 </div>
                 <div className="flex justify-between text-sm mt-2 border-t border-white/20 pt-2">
-                  <span className="font-semibold text-white">
-                    Total Repayment
-                  </span>
+                  <span className="font-semibold text-white">Total Repayment</span>
                   <span className="font-mono font-semibold text-indigo-400">
                     {totalRepay.toFixed(2)} USDC
                   </span>

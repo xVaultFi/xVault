@@ -21,10 +21,11 @@ export default function Navbar() {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="w-full sticky top-0 z-40  backdrop-blur-md ">
+      <nav className="w-full sticky top-0 z-40 bg-transparent backdrop-blur-sm">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-3 relative">
-          {/* LEFT SIDE */}
-          <div className="flex items-center gap-8">
+          
+          {/* LEFT SIDE - LOGO */}
+          <div className="flex items-center gap-2 min-w-[150px]">
             <Link href="/" className="flex items-center gap-2">
               <Image
                 src="/logo.png"
@@ -37,23 +38,23 @@ export default function Navbar() {
                 XVaultFi
               </span>
             </Link>
+          </div>
 
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-6 ml-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
+          {/* CENTER NAVLINKS */}
+          <div className="hidden md:flex flex-1 justify-center items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center justify-end gap-4 min-w-[150px]">
             <button
               type="button"
               onClick={() => setSettingsOpen(true)}
@@ -64,7 +65,7 @@ export default function Navbar() {
             <WalletConnect />
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden text-gray-300 hover:text-white transition-colors cursor-pointer"
@@ -73,7 +74,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Dropdown */}
+        {/* MOBILE DROPDOWN */}
         {open && (
           <div className="md:hidden border-t border-gray-800 bg-black/95 animate-slide-down relative z-40">
             {navLinks.map((link) => (
@@ -86,7 +87,6 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-
             <div className="border-t border-gray-800 mt-2">
               <button
                 type="button"
@@ -109,12 +109,10 @@ export default function Navbar() {
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
           onClick={() => setSettingsOpen(false)}
         >
-          {/* Modal Box */}
           <div
             className="bg-[#0d0d0d] border border-gray-800 rounded-2xl shadow-xl w-[400px] text-gray-300 relative"
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
             <div className="flex justify-between items-center border-b border-gray-800 px-5 py-3">
               <h2 className="text-lg font-semibold text-white">Settings</h2>
               <button
@@ -126,7 +124,6 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Content */}
             <div className="p-5 space-y-5">
               {/* Default Currency */}
               <div>

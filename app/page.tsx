@@ -7,11 +7,11 @@ import ShaderBackground from "@/app/components/ShaderBackground"
 import Navbar from "./components/Navbar"
 
 export default function LandingPage() {
-  return (
+  return ( 
     <ShaderBackground>
-     <Navbar/>
+      <Navbar/>
       <HeroContent />
-      <PulsingCircle />
+    
     </ShaderBackground>
   )
 }

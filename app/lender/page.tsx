@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from "react";
 import Header from "@/app/components/Header";
 import DarkBackground from "@/app/components/DarkBackground";
+import Navbar from "../components/Navbar";
 
 export default function RwaLenderCard() {
   const daysOptions = [7, 15, 30] as const;
@@ -36,7 +37,7 @@ export default function RwaLenderCard() {
 
   return (
     <DarkBackground>
-      <Header />
+     <Navbar/>
       <div className="flex items-center justify-center h-screen">
         <div className="max-w-md w-full mx-auto p-4">
           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg p-5 max-h-[80vh] overflow-y-auto">
