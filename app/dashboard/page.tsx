@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Header from "@/app/components/Header";
-import ShaderBackground from "@/app/components/ShaderBackground";
+import DarkBackground from "@/app/components/DarkBackground";
 
 export default function Dashboard() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -23,7 +23,7 @@ export default function Dashboard() {
   };
 
   return (
-    <ShaderBackground>
+    <DarkBackground>
       <Header />
       <div className="min-h-screen p-6 pt-20">
         {/* Header Section */}
@@ -118,6 +118,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-    </ShaderBackground>
+    </DarkBackground>
   );
 }
