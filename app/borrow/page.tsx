@@ -170,7 +170,7 @@ export default function RwaStakingCard() {
           </div>
 
           {/* Amount input */}
-          <label className="block bg-white rounded-xl mt-2 p-2">
+          <label className="block bg-white dark:bg-slate-900 rounded-xl mt-2 p-2">
             <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
               Amount to stake (USD)
             </span>
@@ -179,7 +179,7 @@ export default function RwaStakingCard() {
               min="0"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="mt-2 w-full rounded-xl border border-slate-200 dark:border-slate-800 px-4 py-2 placeholder:text-slate-400"
+              className="mt-2 w-full rounded-xl border border-slate-200 dark:border-slate-800  px-4 py-2 placeholder:text-slate-400"
               placeholder="360"
             />
           </label>
