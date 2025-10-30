@@ -170,7 +170,7 @@ export default function RwaStakingCard() {
           </div>
 
           {/* Amount input */}
-          <label className="block bg-white dark:bg-slate-800 border dark:border-slate-600 rounded-xl mt-2 p-2">
+          <label className="mt-3 p-4 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
             <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
               Amount to stake (USD)
             </span>
