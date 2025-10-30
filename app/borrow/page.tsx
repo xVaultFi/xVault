@@ -180,7 +180,7 @@ export default function RwaStakingCard() {
              
               onChange={(e) => setAmount(e.target.value)}
               className="mt-2 w-full rounded-xl border border-slate-600 dark:border-slate-600  px-4 py-2 placeholder:text-slate-400"
-              placeholder="enter amount eg. $100 and 50%"
+              placeholder="Enter Amount e.g. $100"
             />
           </label>
 

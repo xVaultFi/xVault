@@ -74,10 +74,10 @@ export default function RwaLenderCard() {
               <input
                 type="text"
                 inputMode="decimal"
-                value={amount}
+                
                 onChange={(e) => setAmount(e.target.value)}
                 className="flex-1 bg-transparent outline-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400"
-                placeholder="500"
+                placeholder="Enter Amount e.g. 500"
               />
               <img
                 src="/usdc.png"
