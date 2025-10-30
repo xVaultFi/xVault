@@ -16,16 +16,16 @@ export default function Header() {
       {/* Navigation */}
       <nav className="flex items-center space-x-2">
         <Link
-          href="/lender"
-          className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-        >
-          Lend
-        </Link>
-        <Link
           href="/borrow"
           className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
         >
           Borrow
+        </Link>
+        <Link
+          href="/lender"
+          className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
+        >
+          Lend
         </Link>
         <Link
           href="/dashboard"
